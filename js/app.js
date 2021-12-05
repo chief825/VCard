@@ -1,7 +1,6 @@
 async function addVCard() {
     var base64 = await toDataURL($("#photo").prop('src'));
     base64 = base64.split('base64,')[1];
-    console.log(base64);
     var name = $("#name").html();
     name = name.replaceAll("&nbsp;", "");
     var position = $("#phone").html();
@@ -9,8 +8,18 @@ async function addVCard() {
     var linkedin = $("#linkedin").attr("href");
     var phone = $("#phone").html();
     phone = phone.replaceAll("&nbsp;", "");
+
     var address = $("#address").html();
     address = address.replaceAll("&nbsp;", "");
+    var street = '', city = '', state = '', zipcode = '', country = '';
+    street = address.split("<br>")[0];
+    if(address.split("<br>").length > 1) {
+      city = address.split("<br>")[1];
+    }
+    if(address.split("<br>").length > 2) {
+      country = address.split("<br>")[2];
+    }
+
     var mail = $("#mail").html();
     mail = mail.replaceAll("&nbsp;", "");
     var link = $("#web").html();
@@ -28,8 +37,8 @@ async function addVCard() {
     newVCard.add(vCard.Entry.TITLE, "")
     newVCard.add(vCard.Entry.EMAIL, mail, vCard.Type.WORK)
     newVCard.add(vCard.Entry.PHONE, phone, vCard.Type.CELL)
-    // johnDoe.add(vCard.Entry.ORGANIZATION, "JohnDoe Corp.")
-    newVCard.add(vCard.Entry.ADDRESS, ";;" + address, vCard.Type.HOME)
+    // newVCard.add(vCard.Entry.ADDRESS, `;;${street};${city};${state};${zipcode};${country}`, vCard.Type.HOME)
+    newVCard.add(vCard.Entry.ADDRESS, `;;${street};${city};${country}`, vCard.Type.HOME)
     newVCard.add(vCard.Entry.URL, link)
     newVCard.add(vCard.Entry.PHOTO, base64)
     newVCard.add(vCard.Entry.TEXT1, text1)

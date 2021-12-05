@@ -1810,3 +1810,15 @@ textarea.w-select {
 .w-condition-invisible {
   display: none !important;
 }
+
+.btn-msg {
+  /* border-radius: 30px; */
+  /* width: 90px !important; */
+  /* height: 55px !important; */
+  background-image: url('../images/msg.jpg') !important;
+  background-size: 95px 45px !important;
+  margin-top: 10px !important;
+  box-shadow: none !important;
+  background-position: 0px !important;
+  padding: 0px !important;
+}
